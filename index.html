@@ -467,7 +467,7 @@
     </nav>
 
     <div class="sidebar-contacts">
-      <a href="mailto:arieda.muco@gmail.com">arieda.muco@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#e382918a868782cd8e96808ca3848e828a8fcd808c8e"><span class="__cf_email__" data-cfemail="8aebf8e3efeeeba4e7ffe9e5caede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a>
       <a href="https://github.com/ariedamuco" target="_blank">GitHub</a>
       <a href="https://orcid.org/0000-0001-9714-8498" target="_blank">ORCID</a>
       <a href="https://medium.com/@arieda.muco" target="_blank">Medium</a>
@@ -512,7 +512,7 @@
             <div class="bio-meta-item"><span>Visiting</span> CEMFI, Madrid</div>
           </div>
 
-          <a class="cv-link" href="cv_AM.pdf" target="_blank">
+          <a class="cv-link" href="https://ariedamuco.github.io/cv_AM.pdf" target="_blank">
             ↓ Curriculum Vitae
           </a>
         </div>
@@ -812,7 +812,7 @@
   </main>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Abstract toggle ──
   function toggleAbstract(btn) {
     const abstract = btn.nextElementSibling;
@@ -864,14 +864,3 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(a => a.classList.remove('active'));
-        const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { threshold: 0.3 });
-
-  sections.forEach(s => observer.observe(s));
-</script>
-
-</body>
-</html>
