@@ -1,0 +1,293 @@
+
+\documentclass[10pt]{article}
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\pdfoutput=1
+% Layout: Puts the section titles on left side of page
+\usepackage{tabularx}
+\usepackage{comment}
+
+\reversemarginpar
+\usepackage{multicol}
+% Use these lines for A4-sized paper
+\usepackage[paper=a4paper,
+%includefoot, % Uncomment to put page number above margin
+marginparwidth=1.0in,       % Length of section titles
+%marginparsep=1.5mm,       % Space between titles and text
+margin=24mm,                   % 25mm margins
+includemp]{geometry}
+%[hidelinks]
+%  More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+% This gives us fun enumeration environments. compactenum will be nice.
+\usepackage{paralist}
+\usepackage{eurosym}
+
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+%\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+%\usepackage{color,hyperref}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue
+}
+%\definecolor{darkblue}{rgb}{0.0,0.0,0.7}
+%\hypersetup{colorlinks,breaklinks,linkcolor=darkblue,urlcolor=darkblue,anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+% Usage: \makeheading{name}
+%
+% Place at top of document. It should be the first thing.
+\newcommand{\makeheading}[1]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+                {\large \bfseries #1}\\[-0.15\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+% Usage: \section{section name}
+%
+% Follow this section IMMEDIATELY with the first line of the section text. Do not put whitespace in between. That is, do this:
+%       \section{My Information}
+%       Here is my information.
+%
+\renewcommand{\section}[2]%
+        {\pagebreak[2]\vspace{1.3\baselineskip}%
+         \phantomsection\addcontentsline{toc}{section}{#1}%
+         \hspace{0in}%
+         \marginpar{
+         \raggedright \scshape #1}#2}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{enumerate}[#1]}{\end{enumerate}%
+         \vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{compactenum}[#1]}{\end{compactenum}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[2]}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\makeheading{Arieda Mu\c co \hspace{2.3cm}  \hspace{5.3cm} Curriculum Vitae}
+\pagestyle{empty}
+
+\section{\textsc{contact information}}
+%
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table 
+%       (adjust it to your liking; default is 1.85in).
+%
+\newlength{\rcollength}\setlength{\rcollength}{3.0in}
+\begin{tabular}[t]{@{}p{\textwidth-\rcollength}p{\rcollength}}
+\href{https://economics.ceu.edu/}{\textsc{Central European University}} &\textit{Orcid:}\hspace{0.003in} \href{https://orcid.org/0000-0001-9714-8498}{  https://orcid.org/0000-0001-9714-8498}   \\
+Department of Economics & \textit{Website:}\hspace{0.003in} \href{https://sites.google.com/site/ariedamuco}{https://sites.google.com/site/ariedamuco}   \\
+Quellenstrasse 51, Vienna &   \textit{E-mail:}\hspace{0.003in} \href{arieda.muco@gmail.com}{ arieda.muco@gmail.com}   \\
+                                    
+
+
+\end{tabular}
+
+\section{\textsc{fields of research}}
+Political economy, economic history, law and economics, development economics \newline
+
+\section{\textsc{employment}}
+Central European University, August 2017 -\newline
+Assistant Professor of Economics
+
+\section{\textsc{education}}
+PhD in Economics, \href{https://www.hhs.se/en/research/departments/de/}{\textsc{Stockholm School of Economics}}, 2011 - 2017\\
+Visiting PhD Student, \href{http://www.cemfi.es/}{CEMFI},  Spain, 2012 - 2014\\\
+M.Phil in Economics, \href{http://economia.uniroma2.it/}{\textsc{Tor Vergata}},  Italy, 2010 - 2011\\
+M.Sc. European Economy and Business Law, \href{http://economia.uniroma2.it/}{\textsc{Tor Vergata}}, Italy, 2008 - 2010\\
+Erasmus Student, \href{https://www.wiso.uni-koeln.de/en/}{University of Cologne}, Germany, September 2005 - February 2006\\
+B.A. in Economics and Business, \href{http://economia.uniroma2.it/}{\textsc{Tor Vergata}},  Italy, 2003 - 2007\\
+
+
+%\section{\textsc{working papers}}
+% (with \href{https://sites.google.com/site/stephanebonhommeresearch/}{St\'{e}phane Bonhomme})\newline
+%\textit{Econometrica}, 83(3), 1147-1184, May 2015\newline
+
+\section{\textsc{publications \& working papers}}
+The politician, the party, and the president: How do political scandals propagate across the party network? {\textcolor{black}{\textbf{Journal of Economic Behavior \& Organization}}}, 2025\\
+Indirect Savings from Public Procurement Centralization (joint with Clarissa Lotti, Giancarlo Spagnolo and Tommaso Valletti)  {\textcolor{black}{\textbf{American Economic Journal: Economic Policy}}}, 2024\\
+Data and Code for: ``Indirect Savings from Public Procurement Centralization", {\textcolor{black}{\textbf{ ICPSR-Interuniversity Consortium for Political and Social Research}}}, 2024\\
+Measuring Corruption from Text Data, {\textcolor{black}{\textbf{ SSRN}}}, 2024\\
+
+
+\section{\textsc{work in progress}}
+
+Corruption, Intimidation and Whistleblowing: Empirical Approach \hspace{0.01in} \\
+The Xerox Effect: Communication Technologies and Political Actions in Autocracy (joint with Marton Fleck)\\
+Barriers at the Door: Access to Legal Advice in Employment Disputes\\
+Unintended Consequences of Legislation (joint with Oliver Kiss) \\
+Legal Threats and Online Dissent: Evidence from Social Media Regulation in Turkey  (joint with Arvind Magesan and Juan S. Morales)\\
+Migration Waves and Political Tides: European Guest-Worker Routes and Electoral Outcomes (joint with Philipp Hilmbauer-Hofmarcher and Ricardo Pique)
+
+
+
+\section{\textsc{seminar presentations}}
+\textbf{2026}  Newcastle University; \\
+\textbf{2025}  Bilkent University \\
+\textbf{2024}  CERGE- EI, Prague; Aix-Marseille; Linnaeus University \\
+\textbf{2023}  Department of Economics at Vienna University of Economics and Business; Institute for Markets and Strategy at Vienna University of Economics and Business; Center for Economic and Regional Studies Budapest; University of Linz \\
+\textbf{2022} CEU Department of Political Sciences  \\
+\textbf{2020} Collegio Carlo Alberto; Bocconi University\\
+\textbf{2019} MTA-KTI, Budapest; JRC, Ispra  \\
+\textbf{2018} LMU Munich; IMT Lucca; SSE Riga (BICEPS)  \newline
+\textbf{2017} University of Vienna; Autonoma of Barcelona (UAB); University of Barcelona (UB); University of Alicante; Central European University (CEU); HEC-Montreal \newline
+\textbf{2016} University College London (UCL); Stockholm School of Economics;  SITE, Stockholm; IFN, Stockholm; University of Gothenburg; IIES, Stockholm University; Max Plank Institute, Munich \newline
+\textbf{2015} Stockholm School of Economics, CEMFI \newline
+\textbf{2014} CEMFI; University Autonoma de Barcelona (UAB);  Stockholm School of Economics \\
+
+
+\section{\textsc{conference presentations and workshops}}
+\textbf{2024} European Economic Association, Rotterdam;  Baltic Economic Conference, Tallinn;  Women in Political Economy, Warwick- St. Andrews; Workshop on Economic History, Uppsala;  Economics of Media Bias Workshop, Cologne; Workshop on Historical Mechanisms of Persistence,  Vienna \\
+\textbf{2023} Winter Meetings of the Econometric Society (Cancelled -- delayed Visa); CESifo/ifo Junior Workshop on Big Data, Democratic Backsliding and Electoral Autocracies -- Site Stockholm; European Economic Association; Baltic Economic Conference; Research workshop at Centre for Economic Analysis (CenEA) \\
+\textbf{2022} Evidence Based Policy Making -- Conference at IHS, Vienna\\
+\textbf{2019} Political Economy of Finance, Chicago Booth;  Rajk College Central European Conference; Conference on corruption and anti-corruption policies, EBRD Kiev \\
+\textbf{2018} MKE, Budapest (Discussant); Workshop on Labor Economics Vienna \newline
+\textbf{2017} SIOE, Columbia University; Enter Jamboree, UCL \newline
+\textbf{2016}  IPWSD Conference, Columbia University; Enter Jamboree, University Carlos III; ASWEDE Conference, University of Gothenburg; SUDSWEc, Stockholm;  Winter Meetings of the Econometric Society, Edinburgh; Simposio de la Asociacion Espa\~{n}ola de Economia, Bilbao \newline
+\textbf{2015}  SITE Fighting Corruption in Developing Countries, Stockholm \newline
+
+
+
+\section{\textsc{teaching}}
+Machine Learning for Natural Language Processing, Central European University, 2021, 2022, 2023, 2024 \newline
+Machine Learning for Natural Language Processing: Deep Learning, Central European University, 2022 \newline
+Empirical Research (Ph.D.), Central European University, 2019, 2023 \newline
+Text Analysis with Python (Ph.D.), Central European University, 2019 \newline
+Coding 2: Python Programming, Visualization and Text Analysis (Graduates), Central European University, 2019, 2020, 2021, 2022, 2023, 2024  \newline
+Introduction to Python (Graduates), Central European University, 2021, 2022, 2023, 2024 
+MA Thesis Advising, 2024
+Empirical Political Economy (Ph.D.), Central European University,  2018, 2019, 2022, 2023   \newline
+Econometrics 2 (Graduates),  Central European University, 2018, 2019, 2021, 2022, 2023, 2024  \newline
+Data Analysis 2, Foundations of Statistics (Graduates), Central European University, 2017 \newline
+Just Data (Graduates, University wide course, 1 class),  Central European University, 2017  \newline
+Applied Econometrics - Time Series (Graduates), Teaching Assistant for Rickard Sandberg, Spring 2012, 2014, Stockholm School of Economics\\
+Introduction to Microeconomics (Undergraduates), Teaching Assistant for Richard Friberg, Fall 2012, Stockholm School of Economics\\
+Certified Carpentries Instructor, 2019 \newline
+
+
+\section{\textsc{Summer Schools \& Workshops}} 
+{\textcolor{black}{\textbf{Workshops For Ukraine:}}} 
+From Messy Documents to Structured Data: Practical Text Processing \& Analysis for Social Science with Python, 2026\newline
+{\textcolor{black}{\textbf{FROGEE training workshop:}}} Data Sources and Methods for Research and Policy Analysis, 2023 \newline
+{\textcolor{black}{\textbf{European Economic Association:}}}  Stata and Git workshop for Economists,  2020 \newline
+ {\textcolor{black}{\textbf{Chicago Booth:}}} Text Analysis with Python for Research Professionals, 2020 \newline
+{\textcolor{black}{\textbf{Universitat Autonoma de Barcelona:}}} Big Data  -- Graduate Summer Course, 2017   \newline
+
+
+
+\section{\textsc{referee service}}
+ Journal of the European Economic Association, Journal of Political Economy: Microeconomics,  Journal of Public Economics, Journal of Economic Behavior and Organization, European Journal of Political Economy, Plos One, Economics of Transition  \\
+
+
+\section{\textsc{scholarships and awards}}
+Research Grant on Corruption, Intimidation and Whistleblowing: An Empirical Approach awarded by the Central European University, 2023\\
+New approaches for combatting corruption and other undue influences on political decision-making, Horizon 2020,
+ 2023\\
+Teaching and Development Grant awarded by Central European University, 2023\\
+Research Grant on Unintended Effects of Legislation awarded by the Central European University, 2021\\
+Just Data, Central European University, Intellectual Themes Initiative\\
+Research Grant on New Tools to Fight Corruption, Wallander and
+Hedelius Foundation, Investigator (1,5 Million SEKs), 2016-2019\\
+Jan Wallanders and Tom Hedelius grant, 2014-2016\\
+ PhD scholarship, Stockholm School of Economics, 2011-2013 \\
+ LANZIDEI grant awarded by Societa Assicurazione per il Credito Estero (10000 \euro), 2010-2011 \\
+LAZIOADISU yearly scholarship awarded on merit bases, 2008-2010\\
+Erasmus scholarship, 2005-2006\\
+LAZIOADISU yearly scholarship awarded on merit bases, 2003-2007\\
+
+\section{\textsc{PhD thesis advisor:}}
+Philipp Hilmbauer-Hofmarcher, Oliver Kiss (co-advisor), Marton Fleck (co-advisor), Boldizsar Juhasz (past student) \\
+%, Marton Fleck (co-advisor) \\
+
+\section{\textsc{PhD thesis examiner:}}
+Gy\H{o}z\H{o} Gy\"{o}ngy\"{o}si, Suparna Das, Attila Gaspar, Judit Kreko\\
+
+\section{\textsc{MA  thesis \& Capstone advisor:}}
+Aleksandra Zinoveva, Glauco Bittencourt, Gayane Gadyan, Maksim Radomskii \\
+Laszlo Szilagyi, Monika Mira Szamohval, Andras Bognar\\
+
+
+\section{\textsc{Additional Academic Engagements}}
+Co-author of ``Economics Lesson with Stata": \url{https://datacarpentry.org/stata-economics/}\\
+Developer of the Stata package for removing accents from strings: \url{https://github.com/ariedamuco/stata-rmaccents}\\
+Co-organizer of the ``Data Editors in Vienna" workshop, 2024\\
+Co-organizer Populism Series at CEU, 2023 \\
+Debate Stata vs R vs Python at CEU,  Winning team with Gayane Gadyan, 2022 \\
+I write on Medium about research, teaching, and technical tools in economics and data science \url{https://medium.com/@arieda.muco}\\
+
+%I write about research, teaching, and technical tools, reaching diverse audiences in economics and data science."
+
+\section{\textsc{Selected Blog Publications}}
+\href{https://medium.com/codex/git-for-economists-a-practical-guide-7d10faf4224f}{Overleaf + Git Integration: A Practical Guide}, \href{https://medium.com/codex}{\textcolor{black}{\textbf{CodeX}}}, September 2024 \\  
+%4.4K views, 1.7K reads\\
+\href{https://towardsdatascience.com/event-study-designs-a-very-beginners-guide-bbacd3ac93b3}{Event Study Designs: A Beginner's Guide}, \href{https://towardsdatascience.com/}{\textcolor{black}{\textbf{Towards Data Science}}}, July 2024 \\  
+%2.4K views, 1K reads\\
+\href{https://medium.com/train-your-coauthor/the-case-against-stata-5954ace8ab79}{The Case Against Stata for Data Analysis}, \href{https://medium.com/train-your-coauthor}{\textcolor{black}{\textbf{Train Your Coauthor}}}, October 2024 \\  
+%950 views, 600 reads\\
+\href{https://medium.com/train-your-coauthor/how-to-improve-your-stata-code-671ca190e3bf}{Tips to Improve Your Stata Code}, \href{https://medium.com/train-your-coauthor}{\textcolor{black}{\textbf{Train Your Coauthor}}}, October 2024 \\  
+%642 views, 346 reads\\
+\href{https://medium.com/p/e7a07a7bddf8}{What Goes Wrong Before Text Analysis Starts}, {\textcolor{black}{\textbf{CEU Threads}}}, September 2024 \\  
+%204 views, 113 reads\\
+\href{https://medium.com/p/a0d9d5e092aa}{
+Tidying Up (Python) Scripts}, Medium, November 2023 \\  
+%232 views, 109 reads\\
+\href{https://medium.com/p/d876b029d8d7}{
+3 ways in which I incorporated ChatGPT in the classroom}, Medium, August 2023 \\  
+%169 views, 80 reads\\
+\href{https://medium.com/p/85071b5a620f}{
+Classroom Conversations: Coding, ChatGPT, and the Quest for Accuracy}, Medium, July 2023 \\  
+%167 views, 82 reads\\
+\href{https://medium.com/p/89f68bdf9548}{
+Measurement Errors in Data Extraction and Cleaning: How to Handle?}, Medium, July 2023 \\  
+%123 views, 56 reads\\
+
+%\section{\textsc{computing}}
+%Python, R, Stata\\
+
+\section{\textsc{languages}}
+Albanian (native), English (fluent), Italian (fluent), Spanish (fluent), German (basic), Portuguese (reading and listening)\\
+
+
+%\section{\textsc{Personal:}}
+%Albanian nationality, Female
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% End CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
