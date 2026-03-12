@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arieda Muço — Economist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1714;
+      --ink-light: #5a5550;
+      --ink-faint: #9a9590;
+      --paper: #faf8f5;
+      --paper-warm: #f2ede6;
+      --rule: #ddd8d0;
+      --accent: #8b3a2a;
+      --accent-light: #c4614e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .site {
+      display: block;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--ink);
+      color: var(--paper-warm);
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 2rem 2.5rem;
+      z-index: 10;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.65rem;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: #faf8f5;
+      margin-bottom: 0.2rem;
+    }
+
+    .title-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 2.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      margin-bottom: auto;
+    }
+
+    nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b0aa9f;
+      text-decoration: none;
+      padding: 0.4rem 0;
+      border-left: 2px solid transparent;
+      padding-left: 0.75rem;
+      margin-left: -0.75rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--paper);
+      border-color: var(--accent-light);
+    }
+
+    .sidebar-contacts {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .sidebar-contacts a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.07em;
+      color: #7a7470;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .sidebar-contacts a:hover { color: var(--paper-warm); }
+
+    /* ── Main ── */
+    main {
+      margin-left: 260px;
+      padding: 4rem 5rem 6rem 5.5rem;
+      width: calc(100% - 260px);
+      min-width: 0;
+    }
+
+    section {
+      padding-top: 5rem;
+      margin-top: -3rem;
+    }
+
+    section:first-of-type { padding-top: 1rem; margin-top: 0; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── Bio ── */
+    .bio-grid {
+      max-width: 620px;
+    }
+
+    .bio-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      word-break: normal;
+      overflow-wrap: break-word;
+    }
+
+    .bio-text p:last-child { margin-bottom: 0; }
+
+    .bio-meta {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .bio-meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-light);
+    }
+
+    .bio-meta-item span {
+      color: var(--ink-faint);
+      margin-right: 0.5rem;
+    }
+
+    .cv-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.1rem;
+      transition: opacity 0.2s;
+    }
+
+    .cv-link:hover { opacity: 0.6; }
+
+    /* ── Research ── */
+    .paper {
+      margin-bottom: 2.8rem;
+      padding-bottom: 2.8rem;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .paper:last-child { border-bottom: none; }
+
+    .paper-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .paper-status.published { color: var(--accent); }
+    .paper-status.working { color: var(--ink-faint); }
+    .paper-status.progress { color: #7a8a6a; }
+
+    .paper-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+    }
+
+    .paper-title a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .paper-title a:hover {
+      color: var(--accent);
+      border-color: var(--accent-light);
+    }
+
+    .paper-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-light);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+
+    .paper-coauthors {
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      margin-bottom: 0.8rem;
+    }
+
+    .abstract {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--ink-light);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .abstract.open { max-height: 400px; }
+
+    .toggle-abstract {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 0;
+      transition: color 0.2s;
+      margin-top: 0.4rem;
+    }
+
+    .toggle-abstract:hover { color: var(--accent); }
+
+    /* ── Paper tags ── */
+    .paper-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.6rem;
+    }
+
+    .paper-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      border: 1px solid var(--rule);
+      padding: 0.18rem 0.5rem;
+      background: var(--paper-warm);
+      border-radius: 1px;
+    }
+
+    /* ── Fields ── */
+    .fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .field-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      border: 1px solid var(--rule);
+      padding: 0.25rem 0.6rem;
+      background: var(--paper-warm);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .field-tag:hover {
+      color: var(--accent);
+      border-color: var(--accent-light);
+      background: #f5ede8;
+    }
+
+    .field-tag.active {
+      color: var(--paper);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── Filter banner ── */
+    #filter-banner {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+    }
+
+    #filter-banner.visible { display: flex; }
+
+    #filter-clear {
+      background: none;
+      border: 1px solid var(--rule);
+      padding: 0.2rem 0.55rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    #filter-clear:hover {
+      color: var(--accent);
+      border-color: var(--accent-light);
+    }
+
+    .paper { transition: opacity 0.25s ease, max-height 0.3s ease; }
+    .paper.hidden { display: none; }
+
+    /* ── Writing ── */
+    .writing-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .writing-item:last-child { border-bottom: none; }
+
+    .writing-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      color: var(--ink-faint);
+      white-space: nowrap;
+      min-width: 60px;
+    }
+
+    .writing-title a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .writing-title a:hover {
+      color: var(--accent);
+      border-color: var(--accent-light);
+    }
+
+    .writing-venue {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-faint);
+      margin-left: 0.6rem;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    main section { animation: fadeUp 0.6s ease both; }
+    main section:nth-child(2) { animation-delay: 0.1s; }
+    main section:nth-child(3) { animation-delay: 0.15s; }
+    main section:nth-child(4) { animation-delay: 0.2s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .site { grid-template-columns: 1fr; }
+      aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1.5rem 2rem;
+        align-items: center;
+      }
+      nav { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-bottom: 0; }
+      .sidebar-contacts { flex-direction: row; flex-wrap: wrap; gap: 0.5rem 1rem; margin-top: 0; }
+      main { margin-left: 0; padding: 2.5rem 1.5rem 4rem; }
+      .bio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site">
+
+  <aside>
+    <div>
+      <div class="name">Arieda<br>Muço</div>
+      <div class="title-label">Economist</div>
+    </div>
+
+    <nav>
+      <a href="#about" class="active">About</a>
+      <a href="#research">Research</a>
+      <a href="#writing">Writing</a>
+      <a href="#teaching">Teaching</a>
+    </nav>
+
+    <div class="sidebar-contacts">
+      <a href="mailto:arieda.muco@gmail.com">arieda.muco@gmail.com</a>
+      <a href="https://github.com/ariedamuco" target="_blank">GitHub</a>
+      <a href="https://orcid.org/0000-0001-9714-8498" target="_blank">ORCID</a>
+      <a href="https://medium.com/@arieda.muco" target="_blank">Medium</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About</div>
+
+      <div class="bio-grid">
+        <div class="bio-text">
+          <p>
+            I am an economist working at the intersection of political economy,
+            economic history, and institutional design. My research uses
+            causal inference and natural language processing to study corruption,
+            accountability, and the political consequences of information.
+          </p>
+          <p>
+            I received my PhD in Economics from the Stockholm School of Economics
+            and have been based at Central European University (currently in Vienna)
+            since 2017. I have used data from Brazil, Hungary, Italy, Albania,
+            Germany, Turkey, and Austria.
+          </p>
+
+          <div class="fields">
+            <button class="field-tag" onclick="filterByTag(this)">Political Economy</button>
+            <button class="field-tag" onclick="filterByTag(this)">Corruption</button>
+            <button class="field-tag" onclick="filterByTag(this)">Economic History</button>
+            <button class="field-tag" onclick="filterByTag(this)">Democratization & Autocracy</button>
+            <button class="field-tag" onclick="filterByTag(this)">Media & Information</button>
+            <button class="field-tag" onclick="filterByTag(this)">Organizational Economics</button>
+            <button class="field-tag" onclick="filterByTag(this)">Law & Economics</button>
+            <button class="field-tag" onclick="filterByTag(this)">NLP</button>
+            <button class="field-tag" onclick="filterByTag(this)">Causal Inference</button>
+          </div>
+
+          <div class="bio-meta" style="margin-top:1.5rem;">
+            <div class="bio-meta-item"><span>PhD</span> Stockholm School of Economics</div>
+            <div class="bio-meta-item"><span>Visiting</span> CEMFI, Madrid</div>
+          </div>
+
+          <a class="cv-link" href="cv_AM.pdf" target="_blank">
+            ↓ Curriculum Vitae
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <div class="section-label">Research</div>
+
+      <div id="filter-banner">
+        <span>Showing: <strong id="filter-label"></strong></span>
+        <button id="filter-clear" onclick="clearFilter()">✕ Clear</button>
+      </div>
+
+      <!-- Published -->
+      <div class="paper">
+        <div class="paper-status published">Published · AEJ: Economic Policy, 2024</div>
+        <div class="paper-title">
+          <a href="https://osf.io/c678u/" target="_blank">
+            Indirect Savings from Public Procurement Centralization
+          </a>
+        </div>
+        <div class="paper-coauthors">
+          with Clarissa Lotti (LEAR), Giancarlo Spagnolo (Stockholm University), Tommaso Valletti (Imperial College)
+        </div>
+        <div class="paper-tags">
+          <span class="paper-tag">Organizational Economics</span>
+          <span class="paper-tag">Public Procurement</span>
+          <span class="paper-tag">Italy</span>
+        </div>
+        <button class="toggle-abstract" onclick="toggleAbstract(this)">+ Abstract</button>
+        <div class="abstract">
+          Centralization of public procurement can lower prices for the government's direct purchase of goods and services. This paper focuses on indirect savings. Public administrations that do not procure directly through a central procurement agency might benefit from the availability of centrally procured goods. We exploit the introduction of a central purchasing agency in Italy and find that prices came down by 22% among administrations that bought autonomously. These indirect effects appear to be driven by informational externalities, especially for less competent public buyers purchasing technologically more complex goods. Accounting for indirect savings increases the estimate of direct ones.
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status published">Published · Journal of Economic Behavior & Organization, 2025</div>
+        <div class="paper-title">
+          <a href="https://www.sciencedirect.com/science/article/pii/S0167268125000174" target="_blank">
+            The Politician, the Party, and the President: How Do Political Scandals Propagate Across the Party Network?
+          </a>
+        </div>
+        <div class="paper-tags">
+          <span class="paper-tag">Political Economy</span>
+          <span class="paper-tag">Corruption</span>
+          <span class="paper-tag">Media</span>
+          <span class="paper-tag">NLP</span>
+          <span class="paper-tag">Brazil</span>
+        </div>
+        <button class="toggle-abstract" onclick="toggleAbstract(this)">+ Abstract</button>
+        <div class="abstract">
+          I examine the extent to which news of a local politician's corruption leads to electoral spillovers to the political party in neighboring jurisdictions and presidential candidates. Using random audits in Brazilian local governments along with novel data on antenna location and coverage, I identify relevant neighboring jurisdictions. The findings reveal that electoral spillovers extend beyond the area of origin, affecting neighboring local politicians and presidential candidates. Furthermore, by analyzing a decade's worth of national newspaper articles, I show that local corruption gets national media attention, particularly in cases of high corruption. The sentiment of news coverage during national elections is more likely to be negative for parties with national candidates, highlighting the significant role national media plays in amplifying local events and shaping the sentiment.
+        </div>
+      </div>
+
+      <!-- Working papers -->
+      <div class="paper">
+        <div class="paper-status working">Working Paper</div>
+        <div class="paper-title">
+          <a href="https://osf.io/preprints/socarxiv/cftvk_v1" target="_blank">
+            Measuring Corruption from Text Data
+          </a>
+        </div>
+        <div class="paper-tags">
+          <span class="paper-tag">Corruption Measurement</span>
+          <span class="paper-tag">NLP</span>
+          <span class="paper-tag">Brazil</span>
+        </div>
+        <button class="toggle-abstract" onclick="toggleAbstract(this)">+ Abstract</button>
+        <div class="abstract">
+          Using Brazilian municipal audit reports, I construct an automated corruption index that combines a dictionary of audit irregularities with principal component analysis. The index validates strongly against independent human coders, explaining 71–73% of the variation in hand-coded corruption counts in samples where coders themselves exhibit high agreement, and the results are robust within these validation samples. The index behaves as theory predicts, correlating with municipal characteristics that prior research links to corruption. Supervised learning alternatives yield nearly identical municipal rankings (R²=0.98), confirming that the dictionary approach captures the same underlying construct. The method scales to the full audit corpus and offers advantages over both manual coding and Large Language Models (LLMs) in transparency, cost, and long-run replicability.
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status working">Working Paper</div>
+        <div class="paper-title">
+          The Xerox Effect: Communication Technologies and Political Action in Autocracy
+        </div>
+        <div class="paper-coauthors">with Marton Fleck (Central European University)</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Economic History</span>
+          <span class="paper-tag">Political Economy</span>
+          <span class="paper-tag">Democratization & Autocracy</span>
+          <span class="paper-tag">Hungary</span>
+        </div>
+        <button class="toggle-abstract" onclick="toggleAbstract(this)">+ Abstract</button>
+        <div class="abstract">
+          We investigate the role of new communication technologies in the fall of autocratic regimes. For this, we use a unique setting: the distribution of photocopy machines, the Xerox program, in communist Hungary. The photocopy machines were seen as a transformative technology, similar to the impact of the Gutenberg press. We use newly digitalized data on machine allocation between 1985 and 1989 and show that areas with machines are more likely to support democratic values, participate in elections, and establish more entrepreneurial activity in the short and long run. Moreover, we show that adjacent areas are also affected. Our results suggest that new communication technologies help overthrow autocracies by promoting democratic values even when political competition is limited and traditional media is censored.
+        </div>
+      </div>
+
+      <!-- In progress -->
+      <div class="paper">
+        <div class="paper-status progress">In Progress</div>
+        <div class="paper-title">Corruption, Intimidation, and Whistleblowing: Empirical Approach</div>
+        <div class="paper-coauthors">with Sylvain Chassang (Princeton University)</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Organizational Economics</span>
+          <span class="paper-tag">Law & Economics</span>
+          <span class="paper-tag">Corruption</span>
+          <span class="paper-tag">Incentives</span>
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status progress">In Progress</div>
+        <div class="paper-title">Barriers at the Door: Access to Legal Advice in Employment Disputes</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Law & Economics</span>
+          <span class="paper-tag">Political Economy</span>
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status progress">In Progress</div>
+        <div class="paper-title">Unintended Consequences of Legislation</div>
+        <div class="paper-coauthors">with Oliver Kiss (Central European University)</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Law & Economics</span>
+          <span class="paper-tag">Corruption</span>
+          <span class="paper-tag">Political Economy</span>
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status progress">In Progress</div>
+        <div class="paper-title">Legal Threats and Online Dissent: Evidence from Social Media Regulation in Turkey</div>
+        <div class="paper-coauthors">with Arvind Magesan (University of Calgary) and Juan S. Morales (Wilfrid Laurier University)</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Political Economy</span>
+          <span class="paper-tag">Media & Information</span>
+          <span class="paper-tag">Democratization & Autocracy</span>
+          <span class="paper-tag">NLP</span>
+        </div>
+      </div>
+
+      <div class="paper">
+        <div class="paper-status progress">In Progress</div>
+        <div class="paper-title">Migration Waves and Political Tides: European Guest-Worker Routes and Electoral Outcomes</div>
+        <div class="paper-coauthors">with Philipp Hilmbauer-Hofmarcher and Ricardo Pique</div>
+        <div class="paper-tags">
+          <span class="paper-tag">Political Economy</span>
+          <span class="paper-tag">Economic History</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- WRITING -->
+    <section id="writing">
+      <div class="section-label">Writing</div>
+
+      <div class="writing-item">
+        <div class="writing-date">2024</div>
+        <div class="writing-title">
+          <a href="https://medium.com/codex/overleaf-git-integration-a-practical-guide" target="_blank">
+            Overleaf + Git Integration: A Practical Guide
+          </a>
+          <span class="writing-venue">CodeX</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2024</div>
+        <div class="writing-title">
+          <a href="https://towardsdatascience.com/event-study-designs-a-beginners-guide" target="_blank">
+            Event Study Designs: A Beginner's Guide
+          </a>
+          <span class="writing-venue">Towards Data Science</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2024</div>
+        <div class="writing-title">
+          <a href="https://medium.com/@arieda.muco" target="_blank">
+            The Case Against Stata for Data Analysis
+          </a>
+          <span class="writing-venue">Train Your Coauthor</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2024</div>
+        <div class="writing-title">
+          <a href="https://medium.com/@arieda.muco" target="_blank">
+            Tips to Improve Your Stata Code
+          </a>
+          <span class="writing-venue">Train Your Coauthor</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2024</div>
+        <div class="writing-title">
+          <a href="https://medium.com/@arieda.muco" target="_blank">
+            What Goes Wrong Before Text Analysis Starts
+          </a>
+          <span class="writing-venue">CEU Threads</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2023</div>
+        <div class="writing-title">
+          <a href="https://medium.com/@arieda.muco" target="_blank">
+            Tidying Up (Python) Scripts
+          </a>
+          <span class="writing-venue">Medium</span>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">2023</div>
+        <div class="writing-title">
+          <a href="https://medium.com/@arieda.muco" target="_blank">
+            Measurement Errors in Data Extraction and Cleaning: How to Handle?
+          </a>
+          <span class="writing-venue">Medium</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <div class="section-label">Teaching & Tools</div>
+
+      <div class="writing-item">
+        <div class="writing-date">Course</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Machine Learning for Natural Language Processing</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Course</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Empirical Political Economy (PhD)</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Course</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Coding with Python: Programming, Visualization & Text Analysis</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Course</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Empirical Research Methods (PhD)</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Workshop</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Git & GitHub for Economists — EEA Workshop, 2020</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Workshop</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">Text Analysis with Python for Research Professionals — Chicago Booth, 2020</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Workshop</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco" target="_blank">From Messy Documents to Structured Data: Text Processing with Python — Summer Schools for Ukraine, 2026</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Package</div>
+        <div class="writing-title">
+          <a href="https://github.com/ariedamuco/stata-rmaccents" target="_blank">stata-rmaccents — Stata package for removing accents from strings</a>
+        </div>
+      </div>
+
+      <div class="writing-item">
+        <div class="writing-date">Lesson</div>
+        <div class="writing-title">
+          <a href="https://datacarpentry.org/stata-economics/" target="_blank">Economics Lesson with Stata — Data Carpentry</a>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ── Abstract toggle ──
+  function toggleAbstract(btn) {
+    const abstract = btn.nextElementSibling;
+    const open = abstract.classList.toggle('open');
+    btn.textContent = open ? '− Abstract' : '+ Abstract';
+  }
+
+  // ── Tag filtering ──
+  function filterByTag(btn) {
+    const tag = btn.textContent.trim();
+    const alreadyActive = btn.classList.contains('active');
+
+    // Clear all active states
+    document.querySelectorAll('.field-tag').forEach(b => b.classList.remove('active'));
+
+    if (alreadyActive) {
+      clearFilter();
+      return;
+    }
+
+    btn.classList.add('active');
+
+    // Show/hide papers
+    document.querySelectorAll('.paper').forEach(paper => {
+      const tags = Array.from(paper.querySelectorAll('.paper-tag'))
+        .map(t => t.textContent.trim());
+      paper.classList.toggle('hidden', !tags.includes(tag));
+    });
+
+    // Show banner
+    document.getElementById('filter-label').textContent = tag;
+    document.getElementById('filter-banner').classList.add('visible');
+
+    // Scroll to research section smoothly
+    document.getElementById('research').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function clearFilter() {
+    document.querySelectorAll('.field-tag').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.paper').forEach(p => p.classList.remove('hidden'));
+    document.getElementById('filter-banner').classList.remove('visible');
+  }
+
+  // ── Active nav on scroll ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const link = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
