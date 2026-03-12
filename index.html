@@ -129,11 +129,20 @@
     .sidebar-contacts a:hover { color: var(--paper-warm); }
 
     /* ── Main ── */
+   /* ── Main ── */
     main {
       margin-left: 260px;
       padding: 4rem 5rem 6rem 5.5rem;
       width: calc(100% - 260px);
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    main > section {
+      width: 100%;
+      max-width: 900px;
     }
 
     section {
@@ -511,7 +520,7 @@
       <div class="bio-grid">
         <div class="bio-text">
           <p>
-            I am a PhD Economist working at the intersection of political economy,
+            I am an Economist working at the intersection of political economy,
             economic history, and institutional design. My research uses
             causal inference and natural language processing to study corruption,
             accountability, and the political consequences of information.
