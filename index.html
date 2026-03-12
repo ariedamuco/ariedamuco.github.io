@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arieda Muço — Economist</title>
+  <title>Arieda Muço — PhD Economist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -472,7 +472,7 @@
   <aside>
     <div>
       <div class="name">Arieda<br>Muço</div>
-      <div class="title-label">Economist</div>
+      <div class="title-label">PhD Economist</div>
     </div>
 
     <nav>
@@ -499,7 +499,7 @@
       <div class="bio-grid">
         <div class="bio-text">
           <p>
-            I am an economist working at the intersection of political economy,
+            I am a PhD Economist working at the intersection of political economy,
             economic history, and institutional design. My research uses
             causal inference and natural language processing to study corruption,
             accountability, and the political consequences of information.
@@ -829,48 +829,46 @@
 </div>
 
 <script>
-  // ── Abstract toggle ──
   function toggleAbstract(btn) {
-    const abstract = btn.nextElementSibling;
-    const open = abstract.classList.toggle('open');
+    var abstract = btn.nextElementSibling;
+    var open = abstract.classList.toggle('open');
     btn.textContent = open ? '− Abstract' : '+ Abstract';
   }
 
-  // ── Tag filtering ──
   function filterByTag(btn) {
-    const tag = btn.textContent.trim();
-    const alreadyActive = btn.classList.contains('active');
-
-    // Clear all active states
-    document.querySelectorAll('.field-tag').forEach(b => b.classList.remove('active'));
-
-    if (alreadyActive) {
-      clearFilter();
-      return;
-    }
-
+    var tag = btn.textContent.trim();
+    var alreadyActive = btn.classList.contains('active');
+    document.querySelectorAll('.field-tag').forEach(function(b) { b.classList.remove('active'); });
+    if (alreadyActive) { clearFilter(); return; }
     btn.classList.add('active');
-
-    // Show/hide papers
-    document.querySelectorAll('.paper').forEach(paper => {
-      const tags = Array.from(paper.querySelectorAll('.paper-tag'))
-        .map(t => t.textContent.trim());
-      paper.classList.toggle('hidden', !tags.includes(tag));
+    document.querySelectorAll('.paper').forEach(function(paper) {
+      var tags = Array.from(paper.querySelectorAll('.paper-tag')).map(function(t) { return t.textContent.trim(); });
+      paper.classList.toggle('hidden', tags.indexOf(tag) === -1);
     });
-
-    // Show banner
     document.getElementById('filter-label').textContent = tag;
     document.getElementById('filter-banner').classList.add('visible');
-
-    // Scroll to research section smoothly
     document.getElementById('research').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function clearFilter() {
-    document.querySelectorAll('.field-tag').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.paper').forEach(p => p.classList.remove('hidden'));
+    document.querySelectorAll('.field-tag').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.paper').forEach(function(p) { p.classList.remove('hidden'); });
     document.getElementById('filter-banner').classList.remove('visible');
   }
 
-  // ── Active nav on scroll ──
-  const sections = document.querySelectorAll('section[
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('nav a');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function(a) { a.classList.remove('active'); });
+        var link = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(function(s) { observer.observe(s); });
+</script>
+
+</body>
+</html>
