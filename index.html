@@ -616,7 +616,7 @@
         <div class="paper-status working">Working Paper</div>
         <div class="paper-title">
           <a href="https://osf.io/preprints/socarxiv/cftvk_v1" target="_blank">
-            Measuring Corruption from Text Data
+            Automated Corruption Measurement and Electoral Cycles: Evidence from Brazil
           </a>
         </div>
         <div class="paper-tags">
@@ -626,7 +626,7 @@
         </div>
         <button class="toggle-abstract" onclick="toggleAbstract(this)">+ Abstract</button>
         <div class="abstract">
-          Using Brazilian municipal audit reports, I construct an automated corruption index that combines a dictionary of audit irregularities with principal component analysis. The index validates strongly against independent human coders, explaining 71–73% of the variation in hand-coded corruption counts in samples where coders themselves exhibit high agreement, and the results are robust within these validation samples. The index behaves as theory predicts, correlating with municipal characteristics that prior research links to corruption. Supervised learning alternatives yield nearly identical municipal rankings (R²=0.98), confirming that the dictionary approach captures the same underlying construct. The method scales to the full audit corpus and offers advantages over both manual coding and Large Language Models (LLMs) in transparency, cost, and long-run replicability.
+          This paper develops an automated measure of municipal corruption using Brazil’s randomized municipal audit reports from 2003 to 2015. I classify each reported irregularity as severe or non-severe using a dictionary-based approach, then combine the resulting severity counts with structural report features, number of pages, lines, images, and total irregularities, into a single corruption index via principal component analysis. The dictionary’s classification is robust to alternative methods: a supervised classifier trained on hand-coded labels produces nearly identical counts and a nearly identical index (r > 0.98), and GPT-5.3 agrees with the dictionary on all 15,000 randomly sampled irregularities (approximately 12% of the corpus). The dictionary classifier requires neither labelled training data nor a large language model; both are used here only on subsamples, as external benchmarks for validation. Conditioning on state fixed effects, the corruption index correlates strongly with independently hand-coded measures (R2 ≈ 0.70–0.90) and covers twice as many reports as existing hand-coded measures. Using the index, I document a pronounced electoral cycle: corruption declines by 0.15–0.22 standard deviations in the election year and the year preceding it, but is indistinguishable from baseline farther from elections. The cycle does not vary systematically with mayoral party affiliation and is present among both re-electable and term-limited mayors, providing no evidence that partisan enforcement or individual re-election incentives are primary drivers.
         </div>
       </div>
 
